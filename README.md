@@ -1,110 +1,81 @@
-Segundo Parcial
+# Sistema de Alquiler de Vehículos 
 
-1. Datos del estudiante
+## 1. Datos del Estudiante y Asignatura
+* **Nombre:** Pedro Yunior Edubique Hernandez
+* **Matrícula:** [2025-1422]
+* **Asignatura:** Programación Básica
+* **Evaluación:** Segundo Parcial
+* **Profesor:** Gamalier Reyes del Carmen
 
-Evaluación	Segundo Parcial
+---
 
-Nombre	Pedro Yunior Edubique Hernández
+## 2. Descripción del Programa
+Aplicación de escritorio desarrollada en **C# (Windows Forms)** que permite gestionar y calcular cotizaciones para el alquiler de vehículos. El sistema permite registrar múltiples vehículos en una misma orden, aplicar cargos por coberturas y accesorios opcionales, gestionar descuentos para clientes corporativos, calcular costos de entrega a domicilio y desglosar el impuesto correspondiente (ITBIS).
 
-Matrícula	2025-1422
+---
 
-Carrera	Ingeniería de Software
+## 3. Datos de Entrada
+Para operar el sistema, el usuario debe ingresar los siguientes datos a través de la interfaz gráfica:
 
-Universidad	Universidad Central del Este (UCE)
+* **Datos del Cliente y Orden:**
+  * **Nombre del cliente:** Texto ingresado en `txtCliente`.
+  * **Fecha de salida:** Fecha seleccionada en `dtpSalida`.
+  * **Tipo de cliente:** Selección de cliente corporativo mediante la casilla `chkCorporativo`.
+  * **Tipo de entrega:** Selección entre entrega en sucursal (`rbtSucursal`) o entrega a domicilio (`rbtDomicilio`).
+* **Datos del Vehículo (por cada registro):**
+  * **Descripción del vehículo:** Nombre o modelo ingresado en `txtVehiculo`.
+  * **Tarifa diaria:** Monto numérico base ingresado en `txtTarifa`.
+  * **Cantidad de días:** Valor numérico entre 1 y 30 seleccionado en `nudDias`.
+  * **Tipo de cobertura:** Selección entre seguro básico (`rbtBasico`) o seguro completo (`rbtCompleto`).
+  * **Servicio adicional:** Selección opcional de GPS mediante `chkGps`.
 
-Proyecto	Examen_RentaCar_PedroEdubique (Windows Forms, C#)
+---
 
-2. Descripción del programa
+## 4. Proceso
+El programa ejecuta las siguientes validaciones y cálculos matemáticos:
 
-RentaCar Express es una aplicación de escritorio en Windows Forms, hecha en un solo formulario (frmAlquiler). Registra los alquileres de vehículos de un cliente y calcula el total a pagar, aplicando descuento corporativo, entrega a domicilio e ITBIS.
+1. **Validación de Campos:** Verifica que el nombre del vehículo no esté vacío, que la tarifa diaria sea un número válido y que exista al menos un vehículo en la lista antes de calcular el total.
+2. **Cálculo de Tarifa Diaria Ajustada:**
+   * Si se selecciona **Seguro Completo**, se suman **RD$ 300.00** a la tarifa diaria.
+   * Si se selecciona **GPS**, se suman **RD$ 100.00** a la tarifa diaria.
+3. **Cálculo por Línea y Subtotal:**
+   * `Importe de Línea = Tarifa Diaria Ajustada × Cantidad de Días`
+   * `Subtotal = Sumatoria de todos los importes agregados a la lista`
+4. **Cálculo de Descuentos, Cargos e Impuestos:**
+   * **Descuento Corporativo:** Si está marcado, se calcula el **15%** sobre el subtotal (`Subtotal × 0.15`).
+   * **Cargo a Domicilio:** Si se elige entrega a domicilio, se suman **RD$ 500.00**; en sucursal es **RD$ 0.00**.
+   * **Monto Gravable:** `(Subtotal - Descuento) + Cargo a Domicilio`
+   * **ITBIS (18%):** `Monto Gravable × 0.18`
+   * **Total General:** `Monto Gravable + ITBIS`
 
-El vehículo y su tarifa se digitan manualmente (no vienen de una lista). La aplicación permite:
+---
 
-Agregar varios vehículos a un mismo alquiler.
-Mostrar cada línea en columnas alineadas dentro de un ListBox.
-Calcular subtotal, descuento, domicilio, ITBIS y total.
-Iniciar un nuevo alquiler y salir con confirmación.
-Reglas de negocio
-Tarifa diaria = tarifa digitada + 300 si el seguro es completo + 100 si lleva GPS.
-Total de línea = tarifa diaria × días. Subtotal = suma de las líneas.
-Descuento = 15 % del subtotal si el cliente es corporativo.
-Entrega a domicilio = RD$500, una sola vez por alquiler.
-Base imponible = subtotal − descuento + entrega a domicilio.
-ITBIS = 18 % de la base imponible. Total = base imponible + ITBIS.
-Controles principales
-Control	Nombre
-Cliente	txtCliente
-Fecha de salida (fecha actual)	dtpSalida
-Cliente corporativo	chkCorporativo
-Vehículo / Tarifa por día	txtVehiculo / txtTarifa
-Días (1 a 30)	nudDias
-Seguro (Básico por defecto)	rbtBasico / rbtCompleto
-GPS	chkGps
-Entrega (Sucursal por defecto)	rbtSucursal / rbtDomicilio
-Encabezado y lista de alquileres	lblEncabezado / lstAlquileres
-Resultados (formato RD$ 0.00)	lblSubtotal, lblDescuento, lblDomicilio, lblItbis, lblTotal
-Botones	btnAgregar, btnCalcular, btnLimpiar, btnSalir
-3. Datos de entrada
-Dato	Descripción
-Cliente	Nombre del cliente (txtCliente)
-Fecha de salida	Fecha actual por defecto (dtpSalida)
-Cliente corporativo	Marcado = aplica 15 % de descuento
-Vehículo	Nombre digitado (ej. Sedán, Jeepeta)
-Tarifa por día	Valor digitado en RD$ (referencia: Económico 1,500 · Sedán 2,200 · Jeepeta 3,500 · Minivan 4,000)
-Días	De 1 a 30 (nudDias)
-Seguro	Básico (+0) o Completo (+RD$300 por día)
-GPS	+RD$100 por día
-Entrega	En sucursal (+0) o a domicilio (+RD$500, una sola vez)
-4. Proceso
-Evento Load
+## 5. Salida
+El sistema muestra los resultados en pantalla mediante los siguientes controles:
 
-Deja los controles y resultados en sus valores iniciales (seguro Básico, entrega en sucursal, 1 día, subtotal en cero) y muestra en lblEncabezado los títulos Días, Vehículo, Tarifa y Total con el mismo formato de columnas del ListBox.
+* **Listado Detallado (`lstAlquileres`):** Muestra cada vehículo agregado con formato tabular alineado (Días, Descripción con extras, Tarifa diaria ajustada e Importe total de la línea).
+* **Resumen Financiero (Etiquetas de texto formateadas en moneda `RD$`):**
+  * **Subtotal (`lblSubtotal`):** Suma acumulada de los vehículos.
+  * **Descuentos (`lblDescuentos`):** Monto descontado si es cliente corporativo.
+  * **Domicilio (`lblDomicilio`):** Cargo aplicado por envío.
+  * **ITBIS (`lblItbis`):** Impuesto calculado (18%).
+  * **Total General (`lblTotal`):** Monto final a pagar por el cliente.
 
-Botón Agregar al alquiler (btnAgregar)
-Valida que haya vehículo y una tarifa numérica mayor que cero.
-Calcula la tarifa diaria: tarifa + 300 (si Completo) + 100 (si GPS).
-Calcula el total de la línea: tarifa diaria × días.
-Muestra la línea en lstAlquileres con PadRight/PadLeft (anchos 6, 24, 10 y 12), con el seguro entre paréntesis junto al vehículo.
-Acumula el total de la línea en la variable decimal subtotal.
-Reinicia los controles del vehículo (nombre, tarifa, días, seguro y GPS) para el siguiente.
-Botón Calcular total (btnCalcular)
-Si no hay vehículos agregados, muestra un mensaje y no calcula.
-descuento = subtotal × 0.15 si es corporativo; si no, 0.
-domicilio = 500 si se eligió entrega a domicilio; si no, 0.
-base = subtotal − descuento + domicilio.
-ITBIS = base × 0.18.
-total = base + ITBIS.
-Muestra todo en las etiquetas con formato RD$ 0.00.
-Botón Nuevo alquiler (btnLimpiar)
+---
 
-Limpia todos los controles y la lista, pone el subtotal en cero y devuelve el foco a txtCliente.
-
-Botón Salir (btnSalir)
-
-Confirma con MessageBox (Sí/No) antes de cerrar la aplicación.
-
-5. Salida
-
-Resultados mostrados en pantalla, con formato RD$ 0.00:
-
-Lista de vehículos del alquiler en columnas (Días, Vehículo, Tarifa, Total).
-Subtotal, Descuento, Domicilio, ITBIS (18 %) y TOTAL A PAGAR.
-Caso de prueba verificado
-
-Carlos Méndez (corporativo), salida 20/11/2026, entrega a domicilio
-
-Línea	Cálculo	Total
-3 Sedán (Completo), tarifa 2,200	(2,200 + 300) × 3	7,500.00
-2 Jeepeta (GPS), tarifa 3,500	(3,500 + 100) × 2	7,200.00
-Concepto	Valor
-Subtotal	RD$ 14,700.00
-Descuento (15 %)	RD$ 2,205.00
-Domicilio	RD$ 500.00
-Base imponible	RD$ 12,995.00
-ITBIS (18 %)	RD$ 2,339.10
-TOTAL A PAGAR	RD$ 15,334.10
-6. Capturas de pantalla
+## 6. Capturas de Pantalla del Programa en Ejecución
 
 <img width="1140" height="700" alt="image" src="https://github.com/user-attachments/assets/1383704c-893a-44e6-b6ea-4488880c5680" />
+
+<img width="1188" height="710" alt="image" src="https://github.com/user-attachments/assets/760a1026-407a-40ee-81a7-c8102247870f" />
+
+<img width="1234" height="710" alt="image" src="https://github.com/user-attachments/assets/1593c912-d713-4a67-a12d-62f6d035493c" />
+
+<img width="1185" height="728" alt="image" src="https://github.com/user-attachments/assets/a30432ee-8f00-4510-abe6-b0508e3a6428" />
+
+<img width="1259" height="766" alt="image" src="https://github.com/user-attachments/assets/3b707287-426e-4ea4-a8bc-47bafea75ee9" />
+
+<img width="1258" height="702" alt="image" src="https://github.com/user-attachments/assets/65647d46-0b8d-4215-ace1-9e3825d814ca" />
+
 
 
