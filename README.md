@@ -105,20 +105,6 @@ ITBIS (18 %)	RD$ 2,339.10
 TOTAL A PAGAR	RD$ 15,334.10
 6. Capturas de pantalla
 
-Reemplaza estas rutas con tus capturas reales (carpeta capturas/ del repositorio).
+<img width="1140" height="700" alt="image" src="https://github.com/user-attachments/assets/1383704c-893a-44e6-b6ea-4488880c5680" />
 
-Pantalla inicial (evento Load)
 
-Pantalla inicial
-
-Vehículos agregados al alquiler
-
-Vehículos agregados
-
-Resultado del caso de prueba (RD$ 15,334.10)
-
-Resultado final
-
-Mensaje de confirmación al salir
-
-Confirmar salida
