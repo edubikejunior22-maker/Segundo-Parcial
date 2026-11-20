@@ -1,4 +1,3 @@
-Examen_RentaCar_PedroEdubique
 Segundo Parcial
 1. Datos del estudiante
 Campo	Detalle
