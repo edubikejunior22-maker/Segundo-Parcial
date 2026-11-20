@@ -1,12 +1,18 @@
 Segundo Parcial
 1. Datos del estudiante
-Campo	Detalle
+
 Evaluación	Segundo Parcial
+
 Nombre	Pedro Yunior Edubique Hernández
+
 Matrícula	2025-1422
+
 Carrera	Ingeniería de Software
+
 Universidad	Universidad Central del Este (UCE)
+
 Proyecto	Examen_RentaCar_PedroEdubique (Windows Forms, C#)
+
 2. Descripción del programa
 
 RentaCar Express es una aplicación de escritorio en Windows Forms, hecha en un solo formulario (frmAlquiler). Registra los alquileres de vehículos de un cliente y calcula el total a pagar, aplicando descuento corporativo, entrega a domicilio e ITBIS.
